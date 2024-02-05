@@ -69,6 +69,23 @@ argocd-apps:
         syncOptions:
           - CreateNamespace=true
 
+    - name: metrics-server
+      namespace: argocd
+      finalizers:
+        - resources-finalizer.argocd.argoproj.io
+      project: system # might make more sense to use another project, however mvp
+      destination:
+        name: in-cluster
+        namespace: kube-system
+      source:
+        repoURL: https://github.com/frealmyr/containers-assignment
+        targetRevision: main
+        path: gitops/system/metrics-server
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: false
+
     # - name: argocd-ui
     #   namespace: argocd
     #   finalizers:

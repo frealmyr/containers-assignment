@@ -1,0 +1,7 @@
+# terraform
+**.terraform**
+terraform.tfstate*
+
+# IDEs
+.idea
+.vscode

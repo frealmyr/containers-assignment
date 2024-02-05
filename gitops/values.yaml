@@ -1,0 +1,160 @@
+argocd-apps:
+  projects:
+    - name: system
+      namespace: argocd
+      finalizers:
+      - resources-finalizer.argocd.argoproj.io
+      sourceRepos:
+      - '*'
+      destinations:
+      - namespace: '*'
+        server: '*'
+      clusterResourceWhitelist:
+      - group: '*'
+        kind: '*'
+      namespaceResourceWhitelist:
+      - group: '*'
+        kind: '*'
+
+    - name: monitoring
+      namespace: argocd
+      finalizers:
+      - resources-finalizer.argocd.argoproj.io
+      sourceRepos:
+      - '*'
+      destinations:
+      - namespace: '*'
+        server: '*'
+      clusterResourceWhitelist:
+      - group: '*'
+        kind: '*'
+      namespaceResourceWhitelist:
+      - group: '*'
+        kind: '*'
+
+  applications:
+    - name: bespoke
+      namespace: argocd
+      finalizers:
+        - resources-finalizer.argocd.argoproj.io
+      project: default # might make more sense to use another project, however mvp
+      destination:
+        name: in-cluster
+        namespace: argocd
+      source:
+        repoURL: https://github.com/frealmyr/containers-assignment-apps
+        targetRevision: main
+        path: .
+
+    # - name: argocd-ui
+    #   namespace: argocd
+    #   finalizers:
+    #     - resources-finalizer.argocd.argoproj.io
+    #   project: system
+    #   destination:
+    #     name: in-cluster
+    #     namespace: argocd
+    #   source:
+    #     repoURL: https://github.com/frealmyr/homelab
+    #     targetRevision: rewrite
+    #     path: gitops/system/argocd
+    #   info:
+    #   - name: url
+    #     value: https://argocd.mgmt.fmlab.no/
+
+  # applicationsets:
+  #   - name: external-secrets
+  #     namespace: argocd
+  #     generators:
+  #       - clusters:
+  #           selector:
+  #             matchLabels:
+  #               argocd.argoproj.io/secret-type: cluster
+  #           values:
+  #             environment: '{{ metadata.annotations.environment }}'
+  #     template:
+  #       metadata:
+  #         name: '{{ values.environment }}-external-secrets'
+  #       spec:
+  #         project: system
+  #         source:
+  #           repoURL: https://github.com/frealmyr/homelab
+  #           targetRevision: rewrite
+  #           path: gitops/system/external-secrets
+  #           helm:
+  #             releaseName: external-secrets
+  #         destination:
+  #           server: '{{ server }}'
+  #           namespace: external-secrets
+  #         syncPolicy:
+  #           automated:
+  #             prune: false
+  #             selfHeal: false
+  #           syncOptions:
+  #             - CreateNamespace=true
+
+  #   - name: cert-manager
+  #     namespace: argocd
+  #     generators:
+  #       - clusters:
+  #           selector:
+  #             matchLabels:
+  #               argocd.argoproj.io/secret-type: cluster
+  #           values:
+  #             environment: '{{ metadata.annotations.environment }}'
+  #     template:
+  #       metadata:
+  #         name: '{{ values.environment }}-cert-manager'
+  #       spec:
+  #         project: system
+  #         source:
+  #           repoURL: https://github.com/frealmyr/homelab
+  #           targetRevision: rewrite
+  #           path: gitops/system/cert-manager
+  #           helm:
+  #             releaseName: cert-manager
+  #         destination:
+  #           server: '{{ server }}'
+  #           namespace: cert-manager
+  #         syncPolicy:
+  #           automated:
+  #             prune: false
+  #             selfHeal: false
+  #           syncOptions:
+  #             - CreateNamespace=true
+
+  #   - name: traefik
+  #     namespace: argocd
+  #     generators:
+  #       - clusters:
+  #           selector:
+  #             matchLabels:
+  #               argocd.argoproj.io/secret-type: cluster
+  #           values:
+  #             environment: '{{ metadata.annotations.environment }}'
+  #             ipAddress: '{{ metadata.annotations.ip-address }}'
+  #     template:
+  #       metadata:
+  #         name: '{{ values.environment }}-traefik'
+  #       spec:
+  #         project: system
+  #         source:
+  #           repoURL: https://github.com/frealmyr/homelab
+  #           targetRevision: rewrite
+  #           path: gitops/system/traefik
+  #           helm:
+  #             releaseName: traefik
+  #             parameters:
+  #               - name: 'environment'
+  #                 value: '{{ values.environment }}'
+  #               - name: 'traefik.service.spec.loadBalancerIP'
+  #                 value: '{{ values.ipAddress }}'
+  #         destination:
+  #           server: '{{ server }}'
+  #           namespace: traefik
+  #         syncPolicy:
+  #           automated:
+  #             prune: false
+  #             selfHeal: false
+  #           syncOptions:
+  #             - CreateNamespace=true

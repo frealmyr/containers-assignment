@@ -50,6 +50,23 @@ argocd-apps:
           prune: true
           selfHeal: false
 
+    - name: traefik
+      namespace: argocd
+      finalizers:
+        - resources-finalizer.argocd.argoproj.io
+      project: system # might make more sense to use another project, however mvp
+      destination:
+        name: in-cluster
+        namespace: argocd
+      source:
+        repoURL: https://github.com/frealmyr/containers-assignment
+        targetRevision: main
+        path: gitops/system/traefik
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: false
+
     # - name: argocd-ui
     #   namespace: argocd
     #   finalizers:

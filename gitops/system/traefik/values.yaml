@@ -1,0 +1,16 @@
+traefik:
+  ingressRoute:
+    dashboard:
+      enabled: false
+  podSecurityPolicy:
+    enabled: true
+  ports:
+    websecure:
+      redirectTo:
+        port: web # TODO: disabled HTTPS for MVP
+  providers:
+    kubernetesCRD:
+      allowCrossNamespace: true
+      allowExternalNameServices: true
+    kubernetesIngress:
+      ingressClass: traefik

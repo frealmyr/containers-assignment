@@ -1,0 +1,12 @@
+apiVersion: v2
+name: traefik
+description: Traefik with authproxy and middlewares
+
+type: application
+
+version: 1.0.0
+
+dependencies:
+  - name: traefik
+    version: '^26' # Any 26.x.x
+    repository: https://traefik.github.io/charts

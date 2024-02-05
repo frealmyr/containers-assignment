@@ -8,10 +8,10 @@ metadata:
     kubernetes.io/ingress.class: traefik
 spec:
   entryPoints:
-    - web
+    - websecure
   routes:
     - kind: Rule
-      match: PathPrefix(`/traefik`)
+      match: Host(`{any:.+}`) && PathPrefix(`/traefik`)
       services:
         - name: api@internal
           kind: TraefikService

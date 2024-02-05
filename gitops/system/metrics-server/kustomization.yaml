@@ -5,4 +5,4 @@ generatorOptions:
   disableNameSuffixHash: true
 
 resources:
-  - https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+  - https://raw.githubusercontent.com/Azure/AKS-Edge/main/samples/others/metrics-server.yaml

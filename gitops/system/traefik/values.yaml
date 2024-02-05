@@ -7,9 +7,9 @@ traefik:
   kubernetesCRD:
     enabled: false
   ports:
-    websecure:
+    web:
       redirectTo:
-        port: web # TODO: disabled HTTPS for MVP
+        port: websecure
   providers:
     kubernetesIngress:
       ingressClass: traefik

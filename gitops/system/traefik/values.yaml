@@ -3,7 +3,7 @@ traefik:
     dashboard:
       enabled: false
   podSecurityPolicy:
-    enabled: true
+    enabled: false
   ports:
     websecure:
       redirectTo:

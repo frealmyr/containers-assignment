@@ -11,7 +11,7 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`{any:.+}`) && PathPrefix(`/traefik`)
+      match: "ClientIP(`0.0.0.0/0`) && PathPrefix(`/traefik`)"
       services:
         - name: api@internal
           kind: TraefikService

@@ -4,6 +4,8 @@ traefik:
       enabled: false
   podSecurityPolicy:
     enabled: false
+  kubernetesCRD:
+    enabled: false
   ports:
     websecure:
       redirectTo:

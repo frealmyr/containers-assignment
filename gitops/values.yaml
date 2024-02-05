@@ -51,7 +51,7 @@ argocd-apps:
           selfHeal: false
 
     - name: traefik
-      namespace: argocd
+      namespace: traefik-system
       finalizers:
         - resources-finalizer.argocd.argoproj.io
       project: system # might make more sense to use another project, however mvp
@@ -66,6 +66,8 @@ argocd-apps:
         automated:
           prune: true
           selfHeal: false
+        syncOptions:
+          - CreateNamespace=true
 
     # - name: argocd-ui
     #   namespace: argocd

@@ -9,8 +9,5 @@ traefik:
       redirectTo:
         port: web # TODO: disabled HTTPS for MVP
   providers:
-    kubernetesCRD:
-      allowCrossNamespace: true
-      allowExternalNameServices: true
     kubernetesIngress:
       ingressClass: traefik

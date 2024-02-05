@@ -57,7 +57,7 @@ argocd-apps:
       project: system # might make more sense to use another project, however mvp
       destination:
         name: in-cluster
-        namespace: traefik-system
+        namespace: traefik
       source:
         repoURL: https://github.com/frealmyr/containers-assignment
         targetRevision: main

@@ -51,13 +51,13 @@ argocd-apps:
           selfHeal: false
 
     - name: traefik
-      namespace: traefik-system
+      namespace: argocd
       finalizers:
         - resources-finalizer.argocd.argoproj.io
       project: system # might make more sense to use another project, however mvp
       destination:
         name: in-cluster
-        namespace: argocd
+        namespace: traefik-system
       source:
         repoURL: https://github.com/frealmyr/containers-assignment
         targetRevision: main

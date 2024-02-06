@@ -6,7 +6,7 @@ traefik:
       entrypoints:
         - websecure
       middlewares:
-        - strip: strip-prefix-traefik
+        - name: strip-prefix-traefik
   podSecurityPolicy:
     enabled: false
   ports:

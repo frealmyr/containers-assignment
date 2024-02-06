@@ -17,6 +17,15 @@ module "aks" {
   azuread_group_superusers = module.ad.azuread_group_superusers
 }
 
+module "key_vault" {
+  source = "./modules/kv"
+
+  azurerm_resource_group_name     = azurerm_resource_group.aks_demo.name
+  azurerm_resource_group_location = azurerm_resource_group.aks_demo.location
+
+  vault_secrets_provider_identity = module.aks.vault_secrets_provider_client_id
+}
+
 module "argocd" {
   source = "./modules/argocd"
 }

@@ -29,4 +29,11 @@ resource "azurerm_kubernetes_cluster" "aks_demo" {
     managed                = true
     admin_group_object_ids = [var.azuread_group_superusers]
   }
+
+  oidc_issuer_enabled       = true
+  workload_identity_enabled = true
+
+  key_vault_secrets_provider {
+    secret_rotation_enabled = false
+  }
 }

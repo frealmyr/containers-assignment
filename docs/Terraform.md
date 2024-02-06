@@ -8,11 +8,11 @@
 
 ## AD
 
-This module contains a resource for granting access to AKS.
+This module contains a resource for granting access to AKS
 
 ## AKS
 
-This module creates a AKS cluster:
+This module creates a AKS cluster
 
   - Uses zone `1, 2` in `US East` (cheapest) for dual-zone cluster
     - To be used with multiple pods for high availability
@@ -22,13 +22,21 @@ This module creates a AKS cluster:
   - Uses dedicated virtual network
     - Pre-req for managed cilium
     - seperate subnets for pods and nodes
+
+## ArgoCD
+
+This module installs and bootstraps ArgoCD after AKS is configured
+
   - Deploys ArgoCD using Helm Chart
     - Deployed in HA configuration
     - Dex disabled, so only admin password for MVP
     - Initial apps-of-apps argo-application is deployed using official argocd-apps helm chart.
       - Targets current git repository `./gitops` folder
       - auto-discovery on `Chart.yaml`
-  - Started on Workload Identity and Vault integration
-    - Dropped due to time constraints
-    - Missing connection between workload identity and entra
 
+## KV
+
+This module contains a basic key vault. The plan was to add Secrets Store CNI, scrapped due to time constraints as I would need workload identity and mapping sp's.
+
+  - Deploys a vault with suffix (for easier re-creation)
+  - Grants vault accessor permission to vault.

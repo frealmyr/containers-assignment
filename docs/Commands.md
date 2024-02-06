@@ -1,5 +1,7 @@
 # Commands Summary
 
+In this readme i summarize the commands I ran in order to get this MVP demo up-and-running.
+
 #### 1. Deploy Terraform for spinning up AKS cluster
 
 ```bash
@@ -139,3 +141,9 @@ opencost:
         url: https://prometheus-prod-39-prod-eu-north-0.grafana.net/api/prom
 EOF
 ```
+
+#### 7. Deploying applications
+
+Sike. ArgoCD is configured with `automated:` so they should all be deployed. If not, I would use ArgoCD UI or CLI to sync.
+
+I'm also more fan of calling sync with webhooks, as `automated:` fetches git on a loop within 2 minutes, causing unnecessary load on scm.

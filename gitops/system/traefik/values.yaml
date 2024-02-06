@@ -1,12 +1,7 @@
 traefik:
   ingressRoute:
     dashboard:
-      enabled: true
-      matchRule: PathPrefix(`/traefik`)
-      entrypoints:
-        - websecure
-      middlewares:
-        - name: strip-prefix-traefik
+      enabled: false
   podSecurityPolicy:
     enabled: false
   ports:

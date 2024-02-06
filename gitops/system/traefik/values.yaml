@@ -4,9 +4,6 @@ traefik:
       enabled: false
   podSecurityPolicy:
     enabled: false
-  kubernetesCRD:
-    enabled: true
-    allowCrossNamespace: true
   ports:
     web:
       redirectTo:
@@ -14,3 +11,5 @@ traefik:
   providers:
     kubernetesIngress:
       ingressClass: traefik
+    kubernetesCRD:
+      allowCrossNamespace: true

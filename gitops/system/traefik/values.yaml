@@ -5,9 +5,7 @@ traefik:
       matchRule: PathPrefix(`/traefik`)
       entrypoints:
         - websecure
-      middlewares:
-        - strip-prefix-traefik
-
+      middlewares: strip-prefix-traefik
   podSecurityPolicy:
     enabled: false
   ports:

@@ -20,7 +20,7 @@ I use the following tools on my workstation in this repository:
 
 ---
 
-I also keep all of my workstation configuration as code, available here:
+I also keep all of my workstation configuration as code in ansible, available here:
 
   - https://github.com/frealmyr/workstation/
   - https://github.com/frealmyr/dotfiles/

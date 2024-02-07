@@ -40,9 +40,9 @@ testapiserver-d889b55f9-r7tvk   2302          576           <status disabled>   
 testapiserver-d889b55f9-xwqxr   344           576           <status disabled>     <status disabled>    <status disabled>   ready            10.244.0.28   
 ```
 
-> In this case, I want to monitor testpaiserver, so the endpoints are 334 and 2302
+In this case, I want to monitor testpaiserver, so the endpoints are 334 and 2302
 
-Then tail Cilium for packet drops
+We can now tail Cilium for packet drops while sending requests:
 
 ```bash
 kubectl -n kube-system exec -ti cilium-khb8n -- cilium monitor --from 344 --from 2302 --type drop
